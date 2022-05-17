@@ -1,5 +1,6 @@
 from django.urls import path
 from django.http import HttpResponse
+from api.views.stock_list import get_stocks
 
 
 def index(request):
@@ -8,9 +9,6 @@ def index(request):
 
 urlpatterns = [
     path('', index, name='index'),
-    # 请求答案
-    # path('query', project_list.get_project_list),  # 请求答案
-
-
-
+    # 下载成分股
+    path('query', get_stocks),
 ]

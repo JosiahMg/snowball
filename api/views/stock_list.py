@@ -13,11 +13,14 @@ from common.log_utils import get_logger
 logger = get_logger(__name__)
 
 
-def post_method_proc(request, context):
+def get_post_method_proc(request, context):
     try:
-        params_dict = request.POST
-        if request.content_type == 'application/json':
-            params_dict = json.loads(request.body if request.body else '{}')
+        if request.method == 'GET':
+            params_dict = request.GET
+        else:
+            params_dict = request.POST
+            if request.content_type == 'application/json':
+                params_dict = json.loads(request.body if request.body else '{}')
         pass
 
     except Exception as e:
@@ -38,9 +41,9 @@ def other_method_proc(request, context):
 
 
 @csrf_exempt
-def get_sh50(request):
+def get_stocks(request):
     context = INIT_STATUS.copy()
-    if request.method == 'POST':
-        return post_method_proc(request, context)
+    if request.method == 'GET' or request.method == 'POST':
+        return get_post_method_proc(request, context)
     else:
         return other_method_proc(request, context)

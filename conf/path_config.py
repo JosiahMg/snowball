@@ -14,7 +14,3 @@ origin_data = os.path.join(resource_dir, 'data_qa.csv')
 """-----------------------结果输出路径---------------------------"""
 outputs_dir = os.path.join(project_dir, 'outputs')
 data_dir = os.path.join(outputs_dir, 'data')
-model_dir = os.path.join(outputs_dir, 'model')
-cuted_data_csv = os.path.join(data_dir, 'cuted_qa.csv')
-cuted_data_json = os.path.join(data_dir, 'cuted_qa.json')
-sparnn_model_path = os.path.join(model_dir, 'sparnn.model')

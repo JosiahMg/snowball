@@ -17,5 +17,5 @@ if sys.platform.startswith('win'):
 else:
     MySQLConfig = config['mysql_unix']
 
-
+TushareConfig = config['tushare']
 

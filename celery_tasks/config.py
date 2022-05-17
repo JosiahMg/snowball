@@ -12,5 +12,4 @@ enable_utc = False
 worker_concurrency = 10
 
 # backend result保存3天
-# result_expires = 60*60*24*3
-result_expires = 60*60
+result_expires = 60*60*24*3

@@ -5,6 +5,8 @@ import os
 import zipfile
 from pandas.io.excel import ExcelWriter
 import pandas as pd
+import json
+import numpy as np
 
 
 def data_exists(dir_name):
@@ -50,3 +52,31 @@ def csv2excel(folder_name, excel_path):
                     file_path = os.path.join(dirpath, filename)
                     pd.read_csv(file_path).to_excel(writer, sheet_name=os.path.splitext(filename)[0], index=False)
 
+
+class NpEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        else:
+            return super(NpEncoder, self).default(obj)
+
+
+def save_object_general(event_graph_dict, data_dir, dict_name):
+    with open(os.path.join(data_dir, dict_name + '.json'), 'w', encoding='utf-8') as f:
+        f.write(json.dumps(event_graph_dict, sort_keys=True, indent=2, cls=NpEncoder,
+                           separators=(',', ': '), ensure_ascii=False))
+
+
+def save_object_general_1(event_graph_dict, data_dir, dict_name):
+    with open(os.path.join(data_dir, dict_name + '.json'), 'w', encoding='utf-8') as f:
+        f.write(json.dumps(event_graph_dict, sort_keys=True, indent=2))
+
+
+def make_dir_if_not_exists(input_dir):
+    """ 判断一个文件夹是否存在，如不存在，则创建该文件夹 """
+    if not os.path.exists(input_dir):
+        os.makedirs(input_dir)

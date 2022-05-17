@@ -30,8 +30,6 @@ venv/
 *.log
 
 resource/
-data/substation_cime/*.csv
-data/
-cache/
+outputs/
 logs/
 

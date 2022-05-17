@@ -20,7 +20,7 @@ class Logger:
         logging.root.setLevel(logging.NOTSET)
 
         self.log_path = path
-        self.log_file_name = 'topo_manage.log'  # 日志文件
+        self.log_file_name = 'snowball.log'  # 日志文件
         self.backup_count = 14  # 保留的日志数量
         # 日志输出级别
         self.console_output_level = _log_level

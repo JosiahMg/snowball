@@ -13,3 +13,5 @@ mysql_unix:
   password: snowball_mysql
   db_name: snowball
 
+tushare:
+  tokenid: bf83c5640925af523fa3b291697e94eaf216c062fc83087399e95249

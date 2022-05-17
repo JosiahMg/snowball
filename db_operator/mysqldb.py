@@ -1,6 +1,8 @@
 import pymysql
 from conf.config import MySQLConfig
+from common.log_utils import get_logger
 
+logger = get_logger(__name__)
 
 
 class MysqlOp(object):
