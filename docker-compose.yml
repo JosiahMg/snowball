@@ -1,0 +1,49 @@
+version: "3.0"
+
+services:
+  snowball:
+    image: "josiah/snowball:${TAG:-1.0.0}"
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    container_name: "snowball"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # 设置容器时区与宿主机保持一致
+      - ./logs:/usr/src/app/logs
+      - /data/snowball/resource:/usr/src/app/resource
+    ports:
+      - 8000:8000
+    environment:
+      TZ: "Asia/Shanghai"
+    depends_on:
+      - redis
+      - mysql
+
+  redis:
+    image: redis:5.0.14
+    container_name: snowball_redis
+    restart: always
+    environment:
+      TZ: "Asia/Shanghai"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql:5.7
+    # network_mode: "host" # 如果需要容器使用宿主机IP(内网IP)，则可以配置此项
+    container_name: snowball_mysql # 指定容器名称，如果不设置此参数，则由系统自动生成
+    restart: always # 设置容器自启模式
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci  # 设置utf8字符集
+    environment:
+      - TZ=Asia/Shanghai # 设置容器时区与宿主机保持一致
+      - MYSQL_ROOT_PASSWORD=snowball_mysql # 设置root密码
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # 设置容器时区与宿主机保持一致
+      - /data/snowball/mysql/my.cnf:/etc/mysql/my.cnf
+      - /data/snowball/mysql/data/:/var/lib/mysql
+      - /data/snowball/mysql/conf.d:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"

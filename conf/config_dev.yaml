@@ -1,0 +1,15 @@
+# dev config
+mysql:
+  host: localhost
+  port: 13306
+  user: root
+  password: 123456
+  db_name: snowball
+
+mysql_unix:
+  host: snowball_mysql
+  port: 3306
+  user: root
+  password: snowball_mysql
+  db_name: snowball
+
