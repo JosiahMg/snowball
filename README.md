@@ -15,7 +15,12 @@ docker-compose up -d
 start.sh: 启动django服务  
 .env: 配置镜像版本TAG
 
+
+# issue
+1. ImportError: DLL load failed while importing win32api
+anaconda环境的"Scripts" 文件夹下执行 "python  pywin32_postinstall.py  -install"
+
+
 ## TODO
-1. 上证50 中证500 中证红利成分股
-2. 低估值的股票池
-3. 成长性好的基金
+1. 低估值的股票池
+2. 成长性好的基金
